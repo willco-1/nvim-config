@@ -2,7 +2,7 @@
 local local_plugins = {
     {
         "harpoon",
-        dir = "~/personal/harpoon",
+        dir = "./personal/harpoon",
         config = function()
             local harpoon = require("harpoon")
 
