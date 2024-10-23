@@ -31,10 +31,9 @@ return {
                 "lua_ls",
                 "rust_analyzer",
                 "gopls",
-                        },
+            },
             handlers = {
                 function(server_name) -- default handler (optional)
-
                     require("lspconfig")[server_name].setup {
                         capabilities = capabilities
                     }
@@ -46,7 +45,7 @@ return {
                         capabilities = capabilities,
                         settings = {
                             Lua = {
-				    runtime = { version = "Lua 5.1" },
+                                runtime = { version = "Lua 5.1" },
                                 diagnostics = {
                                     globals = { "vim", "it", "describe", "before_each", "after_each" },
                                 }
@@ -58,7 +57,7 @@ return {
         })
 
 
-         local null_ls = require("null-ls")
+        local null_ls = require("null-ls")
         null_ls.setup({
             sources = {
                 null_ls.builtins.formatting.prettier,
@@ -69,11 +68,11 @@ return {
         vim.cmd([[
             augroup FormatAutogroup
                 autocmd!
-                autocmd BufWritePost *.js,*.jsx,*.ts,*.tsx,*.css,*.json,*.md lua vim.lsp.buf.format()
+                autocmd BufWritePost *.js,*.jsx,*.ts,*.tsx,*.css,*.json,*.md, *.rs,  lua vim.lsp.buf.format()
             augroup END
         ]])
 
-        local cmp_select = { behavior = cmp.SelectBehavior.Select }
+
 
         local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
