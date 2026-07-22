@@ -1,0 +1,35 @@
+return {
+    {
+        "folke/snacks.nvim",
+        lazy = true,
+    },
+    {
+        "coder/claudecode.nvim",
+        dependencies = { "folke/snacks.nvim" },
+        config = true,
+        cmd = {
+            "ClaudeCode",
+            "ClaudeCodeFocus",
+            "ClaudeCodeSelectModel",
+            "ClaudeCodeAdd",
+            "ClaudeCodeSend",
+            "ClaudeCodeTreeAdd",
+            "ClaudeCodeStatus",
+            "ClaudeCodeStart",
+            "ClaudeCodeStop",
+            "ClaudeCodeOpen",
+            "ClaudeCodeClose",
+            "ClaudeCodeDiffAccept",
+            "ClaudeCodeDiffDeny",
+            "ClaudeCodeCloseAllDiffs",
+        },
+        keys = {
+            { "<leader>cc", "<cmd>ClaudeCode<cr>",              desc = "Toggle Claude" },
+            { "<leader>cf", "<cmd>ClaudeCodeFocus<cr>",         desc = "Focus Claude" },
+            { "<leader>cr", "<cmd>ClaudeCode --resume<cr>",     desc = "Resume Claude" },
+            { "<leader>cb", "<cmd>ClaudeCodeAdd %<cr>",         desc = "Add buffer to Claude" },
+            { "<leader>cs", "<cmd>ClaudeCodeSend<cr>",          mode = "v", desc = "Send selection to Claude" },
+            { "<leader>cm", "<cmd>ClaudeCodeSelectModel<cr>",   desc = "Select Claude model" },
+        },
+    },
+}

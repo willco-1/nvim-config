@@ -1,0 +1,61 @@
+#!/usr/bin/env bash
+
+read -r RICETHEME < "$HOME"/.config/bspwm/.rice
+export RICETHEME
+PATH="$HOME/.config/bspwm/scripts:$PATH"
+rice_dir="$HOME/.config/bspwm/rices/$RICETHEME"
+
+export _JAVA_AWT_WM_NONREPARENTING=1
+
+xrandr --output eDP1 --auto --output HDMI1 --auto --right-of eDP1
+
+workspaces() {
+	name=1
+	for monitor in $(bspc query -M); do
+		bspc monitor "${monitor}" -n "$name" -d '1' '2' '3' '4' '5' '6'
+		(( name++ ))
+	done
+}
+
+workspaces
+
+bspc config external_rules_command $HOME/.config/bspwm/scripts/ExternalRules
+
+bspc config split_ratio                   0.51
+bspc config single_monocle                true
+bspc config borderless_monocle            false
+bspc config gapless_monocle               false
+
+bspc config focus_follows_pointer         true
+bspc config pointer_follows_focus         false
+bspc config pointer_motion_interval       5
+bspc config pointer_modifier              mod4
+bspc config pointer_action1               move
+bspc config pointer_action2               resize_side
+bspc config pointer_action3               resize_corner
+
+bspc rule -a scratch sticky=on state=floating focus=on
+
+. SetSysVars
+
+processes=("picom" "polybar" "eww" "sxhkd" "dunst")
+
+for process in "${processes[@]}"; do
+  if pidof -q "$process"; then
+    pkill -9 -x "$process" > /dev/null; sleep 0.1
+  fi
+done
+
+. ${rice_dir}/Theme.sh
+
+picom --config "$HOME"/.config/bspwm/picom.conf &
+
+dunst -config "$HOME"/.config/bspwm/dunstrc &
+
+feh -z --no-fehbg --bg-fill "${rice_dir}/walls" &
+
+sxhkd -c "$HOME"/.config/bspwm/sxhkdrc &
+
+pidof -q polkit-gnome-authentication-agent-1 || /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+
+xsetroot -cursor_name left_ptr

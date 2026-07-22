@@ -1,0 +1,24 @@
+# Zsh runtime files
+config/zsh/zcompdump
+config/zsh/zhistory
+
+# Nvim lock file (optional - some people track this)
+# config/nvim/lazy-lock.json
+
+# Tmux plugins (install via TPM on new machine)
+config/tmux/plugins/
+
+# MPD runtime files
+config/mpd/mpd.db
+config/mpd/mpdstate
+config/mpd/log
+
+# Fastfetch image cache
+config/fastfetch/gengar.jpg
+
+# Ncmpcpp log
+config/ncmpcpp/error.log
+
+# OS files
+.DS_Store
+Thumbs.db
